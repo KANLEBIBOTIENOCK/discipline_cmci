@@ -1,7 +1,7 @@
 $releaseDir = "c:\Users\HP\Desktop\Discipline\build\windows\x64\runner\Release"
 $zipPath = "$env:TEMP\aline_payload.zip"
 $iconPath = "c:\Users\HP\Desktop\Discipline\windows\runner\resources\app_icon.ico"
-$outputInstaller = "C:\Users\HP\Desktop\Aline_Setup.exe"
+$outputInstaller = "C:\Users\HP\Desktop\Aline.exe"
 
 # Create ZIP archive of release folder
 if (Test-Path $zipPath) { Remove-Item $zipPath -Force }
@@ -261,7 +261,7 @@ namespace AlineInstaller
 $csFile = "$env:TEMP\AlineInstaller.cs"
 [System.IO.File]::WriteAllText($csFile, $csCode)
 
-Write-Host "Compilation de l'installeur Aline_Setup.exe..."
+Write-Host "Compilation de l'exécutable Aline.exe..."
 $csc = "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
 $compileArgs = @(
     "/target:winexe",
@@ -282,8 +282,8 @@ $compileArgs = @(
 Start-Process -FilePath $csc -ArgumentList $compileArgs -NoNewWindow -Wait
 
 if (Test-Path $outputInstaller) {
-    Write-Host "SUCCESS: Installeur généré à $outputInstaller"
-    Copy-Item $outputInstaller "c:\Users\HP\Desktop\Discipline\Aline_Setup.exe" -Force
+    Write-Host "SUCCESS: Fichier généré à $outputInstaller"
+    Copy-Item $outputInstaller "c:\Users\HP\Desktop\Discipline\Aline.exe" -Force
 } else {
     Write-Host "Échec de la compilation."
 }

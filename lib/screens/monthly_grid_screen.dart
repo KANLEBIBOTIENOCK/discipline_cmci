@@ -438,12 +438,7 @@ class _MonthlyGridScreenState extends State<MonthlyGridScreen> {
                                                       (v) => e.pgSouls = v,
                                                     ),
                                                   ),
-                                                  _buildDataCell(
-                                                    e.fasting.code,
-                                                    colJp,
-                                                    isBold: true,
-                                                    onTap: () => _editFastingCell(context, e),
-                                                  ),
+                                                  _buildFastingDataCell(e, colJp, context),
                                                   _buildDataCell(
                                                     DailyEntry.formatMinutes(e.rsMinutes),
                                                     colRs,
@@ -1015,6 +1010,43 @@ class _MonthlyGridScreenState extends State<MonthlyGridScreen> {
               color: onTap != null && value.isNotEmpty ? AppTheme.primaryRoseDark : AppTheme.textMain,
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFastingDataCell(DailyEntry e, double width, BuildContext context) {
+    final hasFasting = e.fasting.code.isNotEmpty && e.fasting.code != '-';
+    return InkWell(
+      onTap: () => _editFastingCell(context, e),
+      child: SizedBox(
+        width: width,
+        height: 34,
+        child: Center(
+          child: hasFasting
+              ? Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: e.fasting.code.contains('JC') ? const Color(0xFFFDE8EF) : const Color(0xFFEFE7FC),
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                      color: e.fasting.code.contains('JC') ? AppTheme.primaryRose : AppTheme.lavender,
+                      width: 1,
+                    ),
+                  ),
+                  child: Text(
+                    e.fasting.code,
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: e.fasting.code.contains('JC') ? AppTheme.primaryRoseDark : AppTheme.lavender,
+                    ),
+                  ),
+                )
+              : const Text(
+                  '-',
+                  style: TextStyle(fontSize: 10.5, color: AppTheme.textMuted),
+                ),
         ),
       ),
     );

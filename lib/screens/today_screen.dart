@@ -81,10 +81,13 @@ class _TodayScreenState extends State<TodayScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // ---- BANNIÈRE FLORALE INSPIRANTE AVEC ACTIONS ----
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 950),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // ---- BANNIÈRE FLORALE INSPIRANTE AVEC ACTIONS ----
               FloralHeaderBanner(
                 title: isToday
                     ? 'Aujourd’hui avec Dieu 🌸'
@@ -464,13 +467,15 @@ class _TodayScreenState extends State<TodayScreen> {
                 ),
               ),
 
-              const SizedBox(height: 70), // Pour laisser de la place au FAB
+              const SizedBox(height: 70),
             ],
           ),
         ),
       ),
-    );
-  }
+    ),
+  ),
+);
+}
 
   Widget _buildHorizontalCalendar(BuildContext context) {
     final state = widget.state;

@@ -58,10 +58,13 @@ class _BooksAndSoulsScreenState extends State<BooksAndSoulsScreen> {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // ---- BANNIÈRE FLORALE ----
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 950),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // ---- BANNIÈRE FLORALE ----
             const FloralHeaderBanner(
               title: 'Littérature & Âmes 🌸',
               subtitle:
@@ -296,7 +299,9 @@ class _BooksAndSoulsScreenState extends State<BooksAndSoulsScreen> {
           ],
         ),
       ),
-    );
+    ),
+  ),
+);
   }
 
   void _showAddBookDialog(BuildContext context) {
