@@ -198,276 +198,300 @@ class _MonthlyGridScreenState extends State<MonthlyGridScreen> {
           ),
           const SizedBox(height: 4),
 
-          // ---- TABLEAU OPTION B : EN-TÊTE FIXÉ EN HAUT + JOURS À GAUCHE + DÉFILEMENT SYNCHRONISÉ ----
+          // ---- TABLEAU : EN-TÊTE FIXÉ EN HAUT + JOURS À GAUCHE + RESPONSIVE DESKTOP/MOBILE ----
           Expanded(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: AppTheme.dividerColor),
-                boxShadow: AppTheme.softCardShadow,
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(13),
-                child: Column(
-                  children: [
-                    // 1. EN-TÊTE FIXÉ EN HAUT (J + DISCIPLINES PKL..RS)
-                    Container(
-                      height: 40,
-                      decoration: const BoxDecoration(
-                        color: AppTheme.primaryRoseLight,
-                        border: Border(bottom: BorderSide(color: AppTheme.dividerColor, width: 1.5)),
-                      ),
-                      child: Row(
-                        children: [
-                          // Coin haut-gauche : J
-                          Container(
-                            width: 46,
-                            height: 40,
-                            alignment: Alignment.center,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFFF6DDE6),
-                              border: Border(right: BorderSide(color: AppTheme.dividerColor, width: 1.5)),
-                            ),
-                            child: const Text(
-                              'J',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13,
-                                color: AppTheme.primaryRoseDark,
-                              ),
-                            ),
-                          ),
-                          // En-tête des disciplines défilable horizontalement
-                          Expanded(
-                            child: SingleChildScrollView(
-                              controller: _headerScrollCtrl,
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: [
-                                  _buildHeaderCell('PKL', 63),
-                                  _buildHeaderCell('PSM', 63),
-                                  _buildHeaderCell('PAUT', 63),
-                                  _buildHeaderCell('RDQD', 63),
-                                  _buildHeaderCell('LB', 58),
-                                  _buildHeaderCell('LC', 62),
-                                  _buildHeaderCell('EVG', 62),
-                                  _buildHeaderCell('PG', 56),
-                                  _buildHeaderCell('JP/JC', 62),
-                                  _buildHeaderCell('RS', 62),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                const dayColWidth = 46.0;
+                // Margins horizontal: 14 on left + 14 on right = 28
+                final availableTableWidth = constraints.maxWidth - dayColWidth;
+                const minTableWidth = 630.0;
+                final tableWidth = availableTableWidth > minTableWidth ? availableTableWidth : minTableWidth;
 
-                    // 2. CORPS DU TABLEAU (DÉFILABLE VERTICALEMENT)
-                    Expanded(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Colonne des Jours (J 1..31 + TOT) fixée à gauche
-                            SizedBox(
-                              width: 46,
-                              child: Column(
-                                children: [
-                                  ...report.entries.map((e) {
-                                    final isToday = e.day == DateTime.now().day &&
-                                        report.month == DateTime.now().month &&
-                                        report.year == DateTime.now().year;
-                                    return InkWell(
-                                      onTap: () => _showDaySummary(context, e, report.year, report.month),
-                                      child: Container(
-                                        height: 34,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          color: isToday
-                                              ? const Color(0xFFFFDDE6)
-                                              : (e.day % 2 == 0 ? Colors.white : const Color(0xFFFCF8FA)),
-                                          border: const Border(
-                                            bottom: BorderSide(color: AppTheme.dividerColor),
-                                            right: BorderSide(color: AppTheme.dividerColor, width: 1.5),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          '${e.day}',
-                                          style: TextStyle(
-                                            fontSize: 11.5,
-                                            fontWeight: FontWeight.bold,
-                                            color: isToday ? AppTheme.primaryRoseDark : AppTheme.textMain,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                                  // Ligne TOT
-                                  Container(
-                                    height: 36,
-                                    alignment: Alignment.center,
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xFFEBD3DC),
-                                      border: Border(
-                                        right: BorderSide(color: AppTheme.dividerColor, width: 1.5),
-                                      ),
-                                    ),
-                                    child: const Text(
-                                      'TOT',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 11.5,
-                                        color: AppTheme.primaryRoseDark,
-                                      ),
+                final colPkl = tableWidth * (63.0 / 630.0);
+                final colPsm = tableWidth * (63.0 / 630.0);
+                final colPaut = tableWidth * (63.0 / 630.0);
+                final colRdqd = tableWidth * (63.0 / 630.0);
+                final colLb = tableWidth * (58.0 / 630.0);
+                final colLc = tableWidth * (62.0 / 630.0);
+                final colEvg = tableWidth * (62.0 / 630.0);
+                final colPg = tableWidth * (56.0 / 630.0);
+                final colJp = tableWidth * (62.0 / 630.0);
+                final colRs = tableWidth * (62.0 / 630.0);
+
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: AppTheme.dividerColor),
+                    boxShadow: AppTheme.softCardShadow,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(13),
+                    child: Column(
+                      children: [
+                        // 1. EN-TÊTE FIXÉ EN HAUT (J + DISCIPLINES PKL..RS)
+                        Container(
+                          height: 40,
+                          decoration: const BoxDecoration(
+                            color: AppTheme.primaryRoseLight,
+                            border: Border(bottom: BorderSide(color: AppTheme.dividerColor, width: 1.5)),
+                          ),
+                          child: Row(
+                            children: [
+                              // Coin haut-gauche : J
+                              Container(
+                                width: dayColWidth,
+                                height: 40,
+                                alignment: Alignment.center,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xFFF6DDE6),
+                                  border: Border(right: BorderSide(color: AppTheme.dividerColor, width: 1.5)),
+                                ),
+                                child: const Text(
+                                  'J',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                    color: AppTheme.primaryRoseDark,
+                                  ),
+                                ),
+                              ),
+                              // En-tête des disciplines défilable horizontalement
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  controller: _headerScrollCtrl,
+                                  scrollDirection: Axis.horizontal,
+                                  child: SizedBox(
+                                    width: tableWidth,
+                                    child: Row(
+                                      children: [
+                                        _buildHeaderCell('PKL', colPkl),
+                                        _buildHeaderCell('PSM', colPsm),
+                                        _buildHeaderCell('PAUT', colPaut),
+                                        _buildHeaderCell('RDQD', colRdqd),
+                                        _buildHeaderCell('LB', colLb),
+                                        _buildHeaderCell('LC', colLc),
+                                        _buildHeaderCell('EVG', colEvg),
+                                        _buildHeaderCell('PG', colPg),
+                                        _buildHeaderCell('JP/JC', colJp),
+                                        _buildHeaderCell('RS', colRs),
+                                      ],
                                     ),
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
+                            ],
+                          ),
+                        ),
 
-                            // Grille des valeurs des disciplines (défilable horizontalement et synchronisée)
-                            Expanded(
-                              child: SingleChildScrollView(
-                                controller: _dataScrollCtrl,
-                                scrollDirection: Axis.horizontal,
-                                child: SizedBox(
-                                  width: 630,
+                        // 2. CORPS DU TABLEAU (DÉFILABLE VERTICALEMENT)
+                        Expanded(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Colonne des Jours (J 1..31 + TOT) fixée à gauche
+                                SizedBox(
+                                  width: dayColWidth,
                                   child: Column(
                                     children: [
                                       ...report.entries.map((e) {
                                         final isToday = e.day == DateTime.now().day &&
                                             report.month == DateTime.now().month &&
                                             report.year == DateTime.now().year;
-
-                                        return Container(
-                                          height: 34,
-                                          decoration: BoxDecoration(
-                                            color: isToday
-                                                ? AppTheme.primaryBlush.withOpacity(0.35)
-                                                : (e.day % 2 == 0 ? Colors.white : const Color(0xFFFCF8FA)),
-                                            border: const Border(bottom: BorderSide(color: AppTheme.dividerColor)),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              _buildDataCell(
-                                                DailyEntry.formatMinutes(e.pklMinutes),
-                                                63,
-                                                onTap: () => _editDurationCell(
-                                                  context, e, 'Prière Faiseur de disciple', 'PKL', e.pklMinutes,
-                                                  (v) => e.pklMinutes = v,
-                                                ),
+                                        return InkWell(
+                                          onTap: () => _showDaySummary(context, e, report.year, report.month),
+                                          child: Container(
+                                            height: 34,
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              color: isToday
+                                                  ? const Color(0xFFFFDDE6)
+                                                  : (e.day % 2 == 0 ? Colors.white : const Color(0xFFFCF8FA)),
+                                              border: const Border(
+                                                bottom: BorderSide(color: AppTheme.dividerColor),
+                                                right: BorderSide(color: AppTheme.dividerColor, width: 1.5),
                                               ),
-                                              _buildDataCell(
-                                                DailyEntry.formatMinutes(e.psmMinutes),
-                                                63,
-                                                onTap: () => _editDurationCell(
-                                                  context, e, 'Prière pour moi', 'PSM', e.psmMinutes,
-                                                  (v) => e.psmMinutes = v,
-                                                ),
+                                            ),
+                                            child: Text(
+                                              '${e.day}',
+                                              style: TextStyle(
+                                                fontSize: 11.5,
+                                                fontWeight: FontWeight.bold,
+                                                color: isToday ? AppTheme.primaryRoseDark : AppTheme.textMain,
                                               ),
-                                              _buildDataCell(
-                                                DailyEntry.formatMinutes(e.pautMinutes),
-                                                63,
-                                                onTap: () => _editDurationCell(
-                                                  context, e, 'Prières Autres', 'PAUT', e.pautMinutes,
-                                                  (v) => e.pautMinutes = v,
-                                                ),
-                                              ),
-                                              _buildDataCell(
-                                                DailyEntry.formatMinutes(e.rdqdMinutes),
-                                                63,
-                                                onTap: () => _editDurationCell(
-                                                  context, e, 'RDQD', 'RDQD', e.rdqdMinutes,
-                                                  (v) => e.rdqdMinutes = v,
-                                                ),
-                                              ),
-                                              _buildDataCell(
-                                                e.lbChapters > 0 ? '${e.lbChapters}' : '',
-                                                58,
-                                                onTap: () => _editCountCell(
-                                                  context, e, 'Lecture Biblique (Chap.)', 'LB', e.lbChapters,
-                                                  (v) => e.lbChapters = v,
-                                                ),
-                                              ),
-                                              _buildDataCell(
-                                                DailyEntry.formatMinutes(e.lcMinutes),
-                                                62,
-                                                onTap: () => _editDurationCell(
-                                                  context, e, 'Lecture Chrétienne', 'LC', e.lcMinutes,
-                                                  (v) => e.lcMinutes = v,
-                                                ),
-                                              ),
-                                              _buildDataCell(
-                                                DailyEntry.formatMinutes(e.evgMinutes),
-                                                62,
-                                                onTap: () => _editDurationCell(
-                                                  context, e, 'Évangélisation', 'EVG', e.evgMinutes,
-                                                  (v) => e.evgMinutes = v,
-                                                ),
-                                              ),
-                                              _buildDataCell(
-                                                e.pgSouls > 0 ? '${e.pgSouls}' : '',
-                                                56,
-                                                onTap: () => _editCountCell(
-                                                  context, e, 'Personnes Gagnées', 'PG', e.pgSouls,
-                                                  (v) => e.pgSouls = v,
-                                                ),
-                                              ),
-                                              _buildDataCell(
-                                                e.fasting.code,
-                                                62,
-                                                isBold: true,
-                                                onTap: () => _editFastingCell(context, e),
-                                              ),
-                                              _buildDataCell(
-                                                DailyEntry.formatMinutes(e.rsMinutes),
-                                                62,
-                                                onTap: () => _editDurationCell(
-                                                  context, e, 'Retraite Spirituelle', 'RS', e.rsMinutes,
-                                                  (v) => e.rsMinutes = v,
-                                                ),
-                                              ),
-                                            ],
+                                            ),
                                           ),
                                         );
                                       }),
-
                                       // Ligne TOT
                                       Container(
                                         height: 36,
+                                        alignment: Alignment.center,
                                         decoration: const BoxDecoration(
-                                          color: Color(0xFFF2E6EB),
+                                          color: Color(0xFFEBD3DC),
+                                          border: Border(
+                                            right: BorderSide(color: AppTheme.dividerColor, width: 1.5),
+                                          ),
                                         ),
-                                        child: Row(
-                                          children: [
-                                            _buildDataCell(DailyEntry.formatMinutes(report.totalPklMinutes), 63, isBold: true),
-                                            _buildDataCell(DailyEntry.formatMinutes(report.totalPsmMinutes), 63, isBold: true),
-                                            _buildDataCell(DailyEntry.formatMinutes(report.totalPautMinutes), 63, isBold: true),
-                                            _buildDataCell('${report.rdqdDaysCount}/${report.daysInMonth}', 63, isBold: true),
-                                            _buildDataCell('${report.totalLbChapters}', 58, isBold: true),
-                                            _buildDataCell(DailyEntry.formatMinutes(report.totalLcMinutes), 62, isBold: true),
-                                            _buildDataCell(DailyEntry.formatMinutes(report.totalEvgMinutes), 62, isBold: true),
-                                            _buildDataCell('${report.totalPgSouls}', 56, isBold: true),
-                                            _buildDataCell('${report.fastingDaysCount}j', 62, isBold: true),
-                                            _buildDataCell(DailyEntry.formatMinutes(report.totalRsMinutes), 62, isBold: true),
-                                          ],
+                                        child: const Text(
+                                          'TOT',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 11.5,
+                                            color: AppTheme.primaryRoseDark,
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ),
+
+                                // Grille des valeurs des disciplines (défilable horizontalement et synchronisée)
+                                Expanded(
+                                  child: SingleChildScrollView(
+                                    controller: _dataScrollCtrl,
+                                    scrollDirection: Axis.horizontal,
+                                    child: SizedBox(
+                                      width: tableWidth,
+                                      child: Column(
+                                        children: [
+                                          ...report.entries.map((e) {
+                                            final isToday = e.day == DateTime.now().day &&
+                                                report.month == DateTime.now().month &&
+                                                report.year == DateTime.now().year;
+
+                                            return Container(
+                                              height: 34,
+                                              decoration: BoxDecoration(
+                                                color: isToday
+                                                    ? AppTheme.primaryBlush.withOpacity(0.35)
+                                                    : (e.day % 2 == 0 ? Colors.white : const Color(0xFFFCF8FA)),
+                                                border: const Border(bottom: BorderSide(color: AppTheme.dividerColor)),
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  _buildDataCell(
+                                                    DailyEntry.formatMinutes(e.pklMinutes),
+                                                    colPkl,
+                                                    onTap: () => _editDurationCell(
+                                                      context, e, 'Prière Faiseur de disciple', 'PKL', e.pklMinutes,
+                                                      (v) => e.pklMinutes = v,
+                                                    ),
+                                                  ),
+                                                  _buildDataCell(
+                                                    DailyEntry.formatMinutes(e.psmMinutes),
+                                                    colPsm,
+                                                    onTap: () => _editDurationCell(
+                                                      context, e, 'Prière pour moi', 'PSM', e.psmMinutes,
+                                                      (v) => e.psmMinutes = v,
+                                                    ),
+                                                  ),
+                                                  _buildDataCell(
+                                                    DailyEntry.formatMinutes(e.pautMinutes),
+                                                    colPaut,
+                                                    onTap: () => _editDurationCell(
+                                                      context, e, 'Prières Autres', 'PAUT', e.pautMinutes,
+                                                      (v) => e.pautMinutes = v,
+                                                    ),
+                                                  ),
+                                                  _buildDataCell(
+                                                    DailyEntry.formatMinutes(e.rdqdMinutes),
+                                                    colRdqd,
+                                                    onTap: () => _editDurationCell(
+                                                      context, e, 'RDQD', 'RDQD', e.rdqdMinutes,
+                                                      (v) => e.rdqdMinutes = v,
+                                                    ),
+                                                  ),
+                                                  _buildDataCell(
+                                                    e.lbChapters > 0 ? '${e.lbChapters}' : '',
+                                                    colLb,
+                                                    onTap: () => _editCountCell(
+                                                      context, e, 'Lecture Biblique (Chap.)', 'LB', e.lbChapters,
+                                                      (v) => e.lbChapters = v,
+                                                    ),
+                                                  ),
+                                                  _buildDataCell(
+                                                    DailyEntry.formatMinutes(e.lcMinutes),
+                                                    colLc,
+                                                    onTap: () => _editDurationCell(
+                                                      context, e, 'Lecture Chrétienne', 'LC', e.lcMinutes,
+                                                      (v) => e.lcMinutes = v,
+                                                    ),
+                                                  ),
+                                                  _buildDataCell(
+                                                    DailyEntry.formatMinutes(e.evgMinutes),
+                                                    colEvg,
+                                                    onTap: () => _editDurationCell(
+                                                      context, e, 'Évangélisation', 'EVG', e.evgMinutes,
+                                                      (v) => e.evgMinutes = v,
+                                                    ),
+                                                  ),
+                                                  _buildDataCell(
+                                                    e.pgSouls > 0 ? '${e.pgSouls}' : '',
+                                                    colPg,
+                                                    onTap: () => _editCountCell(
+                                                      context, e, 'Personnes Gagnées', 'PG', e.pgSouls,
+                                                      (v) => e.pgSouls = v,
+                                                    ),
+                                                  ),
+                                                  _buildDataCell(
+                                                    e.fasting.code,
+                                                    colJp,
+                                                    isBold: true,
+                                                    onTap: () => _editFastingCell(context, e),
+                                                  ),
+                                                  _buildDataCell(
+                                                    DailyEntry.formatMinutes(e.rsMinutes),
+                                                    colRs,
+                                                    onTap: () => _editDurationCell(
+                                                      context, e, 'Retraite Spirituelle', 'RS', e.rsMinutes,
+                                                      (v) => e.rsMinutes = v,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          }),
+
+                                          // Ligne TOT
+                                          Container(
+                                            height: 36,
+                                            decoration: const BoxDecoration(
+                                              color: Color(0xFFF2E6EB),
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                _buildDataCell(DailyEntry.formatMinutes(report.totalPklMinutes), colPkl, isBold: true),
+                                                _buildDataCell(DailyEntry.formatMinutes(report.totalPsmMinutes), colPsm, isBold: true),
+                                                _buildDataCell(DailyEntry.formatMinutes(report.totalPautMinutes), colPaut, isBold: true),
+                                                _buildDataCell('${report.rdqdDaysCount}/${report.daysInMonth}', colRdqd, isBold: true),
+                                                _buildDataCell('${report.totalLbChapters}', colLb, isBold: true),
+                                                _buildDataCell(DailyEntry.formatMinutes(report.totalLcMinutes), colLc, isBold: true),
+                                                _buildDataCell(DailyEntry.formatMinutes(report.totalEvgMinutes), colEvg, isBold: true),
+                                                _buildDataCell('${report.totalPgSouls}', colPg, isBold: true),
+                                                _buildDataCell('${report.fastingDaysCount}j', colJp, isBold: true),
+                                                _buildDataCell(DailyEntry.formatMinutes(report.totalRsMinutes), colRs, isBold: true),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             ),
           ),
         ],

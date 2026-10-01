@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "org.cmci.discipline" "\0"
-            VALUE "FileDescription", "discipline_cmci" "\0"
+            VALUE "FileDescription", "Aline" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "discipline_cmci" "\0"
+            VALUE "InternalName", "Aline" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 org.cmci.discipline. All rights reserved." "\0"
-            VALUE "OriginalFilename", "discipline_cmci.exe" "\0"
-            VALUE "ProductName", "discipline_cmci" "\0"
+            VALUE "OriginalFilename", "Aline.exe" "\0"
+            VALUE "ProductName", "Aline" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
