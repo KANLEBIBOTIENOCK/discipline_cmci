@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discipline CMCI - Suivi Spirituel Féminin 🌸</title>
+  <!-- Google Fonts: Playfair Display & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- html2pdf.js for instant PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <style>
+    :root {
+      /* Palette Haute Lisibilité & Douceur Florale */
+      --primary-rose: #C8466D;
+      --primary-rose-dark: #8F2245;
+      --primary-rose-light: #FDE8EF;
+      --primary-blush: #F5C6D6;
+      --lavender: #8352D4;
+      --lavender-light: #EFE7FC;
+      --warm-gold: #C9822B;
+      --warm-gold-light: #FDF4E7;
+      --sage-green: #3F8A65;
+      --sage-green-light: #E6F4ED;
+      --bg-light: #FFF9FA;
+      
+      /* Typographie & Contraste WCAG AA */
+      --text-main: #24141C;
+      --text-muted: #5C4A54;
+      --divider: #EBD6DD;
+      --card-bg: #FFFFFF;
+      --shadow-soft: 0 8px 20px rgba(143, 34, 69, 0.08), 0 2px 5px rgba(0, 0, 0, 0.03);
+      --shadow-glow: 0 8px 22px rgba(200, 70, 109, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: linear-gradient(135deg, #FDE8EF 0%, #F5E8F3 50%, #EADEFF 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: var(--text-main);
+    }
+
+    .phone-container {
+      width: 100%;
+      max-width: 440px;
+      height: 900px;
+      max-height: 96vh;
+      background: var(--bg-light);
+      border-radius: 44px;
+      box-shadow: 0 25px 60px rgba(143, 34, 69, 0.25), 0 0 0 10px #FFFFFF, 0 0 0 12px #EBD6DD;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .status-bar {
+      height: 38px;
+      padding: 10px 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+      z-index: 10;
+    }
+
+    .island-notch {
+      width: 110px;
+      height: 22px;
+      background: #1C0F15;
+      border-radius: 20px;
+      margin: 0 auto;
+    }
+
+    .app-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 18px 85px;
+      scroll-behavior: smooth;
+    }
+    .app-body::-webkit-scrollbar {
+      width: 4px;
+    }
+    .app-body::-webkit-scrollbar-thumb {
+      background: var(--primary-blush);
+      border-radius: 10px;
+    }
+
+    /* Bannière Florale */
+    .floral-banner {
+      background: linear-gradient(135deg, #DF6186 0%, #C8466D 50%, #B03058 100%);
+      border-radius: 24px;
+      padding: 18px 20px;
+      color: white;
+      box-shadow: var(--shadow-glow);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .floral-banner::after {
+      content: '🌸';
+      position: absolute;
+      right: -10px;
+      bottom: -15px;
+      font-size: 85px;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+    .floral-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .floral-banner p {
+      font-size: 12px;
+      font-style: italic;
+      opacity: 0.96;
+      line-height: 1.35;
+      color: #FFF5F8;
+    }
+    .banner-subrow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .disciple-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(8px);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+    }
+
+    /* 📅 BARRE DE SÉLECTION DU MOIS INTERACTIVE */
+    .month-selector-bar {
+      background: white;
+      border-radius: 18px;
+      padding: 10px 16px;
+      border: 1.5px solid var(--primary-blush);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .month-selector-bar:hover {
+      background: #FFF8FA;
+      border-color: var(--primary-rose);
+    }
+    .month-display-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary-rose-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .month-change-btn {
+      background: var(--primary-rose-light);
+      color: var(--primary-rose-dark);
+      padding: 4px 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ⏱️ CHRONOMÈTRE SPIRITUEL */
+    .timer-card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 14px 16px;
+      border: 1.5px solid var(--primary-blush);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .timer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .timer-display {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--primary-rose-dark);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.5px;
+    }
+    .timer-select {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      padding: 4px 8px;
+      border-radius: 8px;
+      border: 1.2px solid var(--divider);
+      background: #FFF9FA;
+      outline: none;
+      margin-top: 2px;
+    }
+    .timer-btn {
+      padding: 7px 14px;
+      background: var(--primary-rose);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 4px 10px rgba(200, 70, 109, 0.3);
+      transition: all 0.2s;
+    }
+    .timer-btn.running {
+      background: #8352D4;
+    }
+
+    /* Barre d'objectif */
+    .goal-progress-card {
+      background: white;
+      border-radius: 18px;
+      padding: 12px 16px;
+      border: 1px solid var(--divider);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .goal-flower-icon {
+      font-size: 30px;
+    }
+    .goal-bar-wrap {
+      flex: 1;
+    }
+    .goal-text-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 5px;
+    }
+    .goal-progress-bg {
+      width: 100%;
+      height: 9px;
+      background: #F4E8EC;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .goal-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #F5C6D6, #C8466D);
+      border-radius: 10px;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Sélecteur de date horizontal */
+    .date-scroller {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+    .date-scroller::-webkit-scrollbar {
+      display: none;
+    }
+    .date-pill {
+      min-width: 52px;
+      height: 68px;
+      background: var(--card-bg);
+      border-radius: 18px;
+      border: 1px solid var(--divider);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-soft);
+      flex-shrink: 0;
+    }
+    .date-pill .day-name {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .date-pill .day-num {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 2px;
+    }
+    .date-pill.active {
+      background: linear-gradient(135deg, #DF6186 0%, #C8466D 100%);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 8px 18px rgba(200, 70, 109, 0.4);
+      transform: translateY(-2px);
+    }
+    .date-pill.active .day-name, .date-pill.active .day-num {
+      color: white;
+    }
+
+    /* Barre de contrôle du jour */
+    .day-control-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      border-radius: 16px;
+      padding: 10px 14px;
+      border: 1px solid var(--divider);
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-soft);
+    }
+    .day-total-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .day-total-text span {
+      color: var(--primary-rose-dark);
+      font-weight: 800;
+    }
+    .reset-day-btn {
+      background: #FFF0F4;
+      color: var(--primary-rose-dark);
+      border: 1px solid #F8CAD8;
+      padding: 5px 11px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Carte de Jeûne */
+    .fasting-card {
+      background: white;
+      border-radius: 18px;
+      padding: 12px 16px;
+      border: 1px solid var(--divider);
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .fasting-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .fasting-options {
+      display: flex;
+      gap: 6px;
+    }
+    .fasting-btn {
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      border: 1px solid var(--divider);
+      background: #FAF5F7;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .fasting-btn.active {
+      background: var(--primary-rose);
+      color: white;
+      border-color: var(--primary-rose);
+      box-shadow: 0 4px 10px rgba(200, 70, 109, 0.3);
+    }
+
+    /* Cartes de Disciplines */
+    .discipline-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 14px 16px;
+      border: 1.2px solid var(--divider);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 12px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .card-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      flex: 1;
+    }
+    .icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+    }
+    .tag-abbr {
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: var(--primary-rose-light);
+      color: var(--primary-rose-dark);
+      display: inline-block;
+      margin-bottom: 2px;
+    }
+    .info-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #F0E2E7;
+      color: var(--text-muted);
+      font-size: 10px;
+      font-weight: bold;
+      margin-left: 4px;
+      cursor: pointer;
+      border: none;
+    }
+    .card-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .card-val-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .card-val {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary-rose-dark);
+      text-align: right;
+    }
+    .card-val.empty {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .edit-icon-btn {
+      color: var(--primary-rose-dark);
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .actions-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-top: 8px;
+      border-top: 1px solid var(--divider);
+    }
+    .quick-increments {
+      display: flex;
+      gap: 6px;
+    }
+    .inc-btn {
+      flex: 1;
+      padding: 6.5px 0;
+      border: 1px solid var(--divider);
+      background: #FCF8FA;
+      border-radius: 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .inc-btn:hover {
+      background: var(--primary-rose-light);
+      color: var(--primary-rose-dark);
+      border-color: var(--primary-rose);
+    }
+    .inc-btn.highlight {
+      background: var(--primary-rose-light);
+      color: var(--primary-rose-dark);
+      border-color: var(--primary-blush);
+    }
+    .inc-btn.decrement {
+      background: #FFF0F4;
+      color: var(--primary-rose-dark);
+      border-color: #F8CAD8;
+    }
+
+    /* 📊 TABLEAU MENSUEL */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .sum-box {
+      background: white;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1.2px solid var(--divider);
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+    }
+    .sum-box .num {
+      font-size: 16.5px;
+      font-weight: 800;
+      color: var(--primary-rose-dark);
+    }
+    .sum-box .lbl {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .checklist-banner {
+      background: #FFF4E8;
+      border: 1.2px solid #FCD3A8;
+      border-radius: 14px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #7C4004;
+      font-weight: 600;
+    }
+    .checklist-banner.complete {
+      background: #EEF8F2;
+      border-color: #A3DEC0;
+      color: #1A5E3A;
+    }
+
+    .table-container {
+      background: white;
+      border-radius: 18px;
+      border: 1.2px solid var(--divider);
+      overflow-x: auto;
+      box-shadow: var(--shadow-soft);
+      max-height: 440px;
+      overflow-y: auto;
+      position: relative;
+    }
+    table {
+      width: 100%;
+      min-width: 600px;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 11px;
+      text-align: center;
+    }
+    th {
+      background: var(--primary-rose-light);
+      color: var(--primary-rose-dark);
+      padding: 8px 4px;
+      font-weight: 800;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      border-bottom: 1.5px solid var(--divider);
+    }
+    td {
+      padding: 6px 4px;
+      border-top: 1px solid var(--divider);
+      color: var(--text-main);
+      cursor: pointer;
+    }
+    th.sticky-col, td.sticky-col {
+      position: sticky;
+      left: 0;
+      z-index: 6;
+      background: #FFF0F5;
+      border-right: 2px solid var(--primary-blush);
+      font-weight: 800;
+      color: var(--primary-rose-dark);
+      width: 38px;
+      min-width: 38px;
+    }
+    th.sticky-col {
+      z-index: 10;
+      background: #FCE0EA;
+    }
+    tr.selected-row td {
+      background: #FDE8EF !important;
+      font-weight: 700;
+    }
+    tr.tot-row td {
+      background: #F4D9E4 !important;
+      font-weight: 800;
+      color: var(--primary-rose-dark);
+      position: sticky;
+      bottom: 0;
+      z-index: 7;
+      border-top: 2px solid var(--primary-rose);
+    }
+    tr.tot-row td.sticky-col {
+      z-index: 11;
+      background: #F0CFDC !important;
+    }
+
+    /* Barre de Navigation en Bas */
+    .bottom-nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 72px;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(16px);
+      border-top: 1.2px solid var(--divider);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding-bottom: 8px;
+      z-index: 20;
+    }
+    .nav-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      padding: 6px 12px;
+      border-radius: 14px;
+    }
+    .nav-tab.active {
+      color: var(--primary-rose-dark);
+      background: var(--primary-rose-light);
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(36, 20, 28, 0.55);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+    .modal-backdrop.show {
+      display: flex;
+    }
+    .modal-card {
+      background: white;
+      border-radius: 24px;
+      padding: 22px;
+      width: 100%;
+      max-width: 350px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+    .modal-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .input-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .input-field {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1.2px solid var(--divider);
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+      outline: none;
+    }
+    .input-field:focus {
+      border-color: var(--primary-rose);
+    }
+    .modal-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+    .btn-cancel {
+      padding: 9px 14px;
+      background: #F0E8EB;
+      color: var(--text-main);
+      border: none;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-delete {
+      padding: 9px 14px;
+      background: #FFE8EC;
+      color: var(--primary-rose-dark);
+      border: none;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-save {
+      padding: 9px 18px;
+      background: var(--primary-rose);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Grille des 12 Mois dans le Modal */
+    .months-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+      margin-bottom: 16px;
+    }
+    .month-pick-btn {
+      padding: 10px 6px;
+      border-radius: 12px;
+      border: 1px solid var(--divider);
+      background: #FFF9FA;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .month-pick-btn:hover {
+      background: var(--primary-rose-light);
+      border-color: var(--primary-rose);
+    }
+    .month-pick-btn.selected {
+      background: var(--primary-rose);
+      color: white;
+      border-color: var(--primary-rose);
+      box-shadow: 0 4px 10px rgba(200, 70, 109, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="phone-container">
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="island-notch"></div>
+      <span>100% 🔋</span>
+    </div>
+
+    <div class="app-body" id="appBody">
+      
+      <!-- === VUE 1 : AUJOURD'HUI === -->
+      <div id="viewToday" class="tab-view">
+        <!-- Bannière florale -->
+        <div class="floral-banner">
+          <h2><span>🌸</span> Aujourd’hui avec Dieu</h2>
+          <p>« Cherchez premièrement le royaume et la justice de Dieu » — Matthieu 6:33</p>
+          <div class="banner-subrow">
+            <div class="disciple-badge" id="bannerDisciple">ASSEU ALINE</div>
+            <div style="font-size:11px; opacity:0.95; font-weight:700;">Jour <span id="bannerDayNum">1</span>/<span id="bannerTotalDays">31</span></div>
+          </div>
+        </div>
+
+        <!-- 📅 SÉLECTEUR DU MOIS ACTIF (CLIQUEZ POUR CHANGER DE MOIS) -->
+        <div class="month-selector-bar" onclick="openMonthModal()">
+          <div class="month-display-title">
+            <i data-lucide="calendar" style="width:18px; color:var(--primary-rose);"></i>
+            <span id="activeMonthDisplay">MARS 2026</span>
+          </div>
+          <div class="month-change-btn">
+            <span>Changer de mois</span>
+            <i data-lucide="chevron-down" style="width:13px;"></i>
+          </div>
+        </div>
+
+        <!-- 🌸 BARRE D'OBJECTIF FLORAL -->
+        <div class="goal-progress-card">
+          <div class="goal-flower-icon" id="goalFlower">🌱</div>
+          <div class="goal-bar-wrap">
+            <div class="goal-text-row">
+              <span id="goalLabel">Objectif prière du jour</span>
+              <span id="goalPercentText" style="color:var(--primary-rose-dark);">0 / 60 min (0%)</span>
+            </div>
+            <div class="goal-progress-bg">
+              <div class="goal-progress-fill" id="goalFill"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⏱️ CHRONOMÈTRE SPIRITUEL -->
+        <div class="timer-card">
+          <div class="timer-left">
+            <i data-lucide="timer" style="color:var(--primary-rose); width:22px;"></i>
+            <div>
+              <div class="timer-display" id="timerDisplay">00:00:00</div>
+              <select id="timerCategory" class="timer-select">
+                <option value="psm">PSM (Prière pour moi)</option>
+                <option value="rdqd">RDQD (Rendez-vous Dieu)</option>
+                <option value="pkl">PKL (Prière Faiseur)</option>
+                <option value="paut">PAUT (Prières Autres)</option>
+                <option value="lc">LC (Lecture Chrétienne)</option>
+                <option value="evg">EVG (Évangélisation)</option>
+              </select>
+            </div>
+          </div>
+          <button class="timer-btn" id="timerActionBtn" onclick="toggleTimer()">
+            <i data-lucide="play" style="width:14px;"></i> Démarrer
+          </button>
+        </div>
+
+        <!-- Sélecteur de date (horizontal des jours du mois sélectionné) -->
+        <div class="date-scroller" id="dateScroller"></div>
+
+        <!-- Barre de contrôle & remise à zéro du jour -->
+        <div class="day-control-bar">
+          <div class="day-total-text">
+            Total prière : <span id="dayTotalPrayer">0 min</span>
+          </div>
+          <button class="reset-day-btn" onclick="resetCurrentDay()">
+            <i data-lucide="rotate-ccw" style="width:13px"></i> Remise à zéro
+          </button>
+        </div>
+
+        <!-- Carte de Jeûne -->
+        <div class="fasting-card">
+          <div class="fasting-title">
+            <i data-lucide="utensils" style="width:16px; color:var(--primary-rose)"></i>
+            <span>Jeûne du jour :</span>
+          </div>
+          <div class="fasting-options">
+            <button class="fasting-btn active" id="btnFastNone" onclick="setFast('none')">Aucun</button>
+            <button class="fasting-btn" id="btnFastJP" onclick="setFast('JP')">JP</button>
+            <button class="fasting-btn" id="btnFastJC" onclick="setFast('JC')">JC</button>
+          </div>
+        </div>
+
+        <!-- CARTES DE DISCIPLINES -->
+        
+        <!-- 1. PSM -->
+        <div class="discipline-card">
+          <div class="card-top">
+            <div class="card-left" onclick="openDirectEdit('psm', 'Prière pour moi (PSM)')">
+              <div class="icon-box" style="background: linear-gradient(135deg, #F6C88A, #E5A65D);">
+                <i data-lucide="heart"></i>
+              </div>
+              <div>
+                <div>
+                  <span class="tag-abbr">PSM</span>
+                  <button class="info-btn" onclick="showSigleInfo(event, 'PSM', 'Prière pour moi : Temps personnel de prière pour sa propre sanctification et ses fardeaux personnels.')">i</button>
+                </div>
+                <div class="card-title">Prière pour moi</div>
+              </div>
+            </div>
+            <div class="card-val-container" onclick="openDirectEdit('psm', 'Prière pour moi (PSM)')">
+              <div class="card-val empty" id="val_psm">0 min</div>
+              <button class="edit-icon-btn"><i data-lucide="edit-3" style="width:15px"></i></button>
+            </div>
+          </div>
+          <div class="actions-row">
+            <div class="quick-increments">
+              <button class="inc-btn" onclick="addMinutes('psm', 15)">+15m</button>
+              <button class="inc-btn" onclick="addMinutes('psm', 30)">+30m</button>
+              <button class="inc-btn highlight" onclick="addMinutes('psm', 60)">+1h00</button>
+            </div>
+            <div class="quick-increments">
+              <button class="inc-btn decrement" onclick="subtractMinutes('psm', 15)">-15m</button>
+              <button class="inc-btn decrement" onclick="subtractMinutes('psm', 30)">-30m</button>
+              <button class="inc-btn decrement" onclick="setMinutesDirect('psm', 0)">Effacer (0)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. RDQD -->
+        <div class="discipline-card">
+          <div class="card-top">
+            <div class="card-left" onclick="openDirectEdit('rdqd', 'Rendez-vous Quotidien avec Dieu (RDQD)')">
+              <div class="icon-box" style="background: linear-gradient(135deg, #DF6186, #C8466D);">
+                <i data-lucide="heart-handshake"></i>
+              </div>
+              <div>
+                <div>
+                  <span class="tag-abbr">RDQD</span>
+                  <button class="info-btn" onclick="showSigleInfo(event, 'RDQD', 'Rendez-vous Quotidien avec Dieu : Temps d’intimité, d’écoute, de méditation et d’adoration avec Dieu.')">i</button>
+                </div>
+                <div class="card-title">Rendez-vous Quotidien avec Dieu</div>
+              </div>
+            </div>
+            <div class="card-val-container" onclick="openDirectEdit('rdqd', 'Rendez-vous Quotidien avec Dieu (RDQD)')">
+              <div class="card-val empty" id="val_rdqd">0 min</div>
+              <button class="edit-icon-btn"><i data-lucide="edit-3" style="width:15px"></i></button>
+            </div>
+          </div>
+          <div class="actions-row">
+            <div class="quick-increments">
+              <button class="inc-btn" onclick="addMinutes('rdqd', 15)">+15m</button>
+              <button class="inc-btn" onclick="addMinutes('rdqd', 30)">+30m</button>
+              <button class="inc-btn highlight" onclick="addMinutes('rdqd', 60)">+1h00</button>
+            </div>
+            <div class="quick-increments">
+              <button class="inc-btn decrement" onclick="subtractMinutes('rdqd', 15)">-15m</button>
+              <button class="inc-btn decrement" onclick="subtractMinutes('rdqd', 30)">-30m</button>
+              <button class="inc-btn decrement" onclick="setMinutesDirect('rdqd', 0)">Effacer (0)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. PKL -->
+        <div class="discipline-card">
+          <div class="card-top">
+            <div class="card-left" onclick="openDirectEdit('pkl', 'Prière pour le Faiseur de disciple (PKL)')">
+              <div class="icon-box" style="background: linear-gradient(135deg, #B588F7, #8352D4);">
+                <i data-lucide="user-check"></i>
+              </div>
+              <div>
+                <div>
+                  <span class="tag-abbr">PKL</span>
+                  <button class="info-btn" onclick="showSigleInfo(event, 'PKL', 'Prière pour le Faiseur de disciple : Intercession dédiée pour votre pasteur / mentor spirituel.')">i</button>
+                </div>
+                <div class="card-title">Prière pour le Faiseur de disciple</div>
+              </div>
+            </div>
+            <div class="card-val-container" onclick="openDirectEdit('pkl', 'Prière pour le Faiseur de disciple (PKL)')">
+              <div class="card-val empty" id="val_pkl">0 min</div>
+              <button class="edit-icon-btn"><i data-lucide="edit-3" style="width:15px"></i></button>
+            </div>
+          </div>
+          <div class="actions-row">
+            <div class="quick-increments">
+              <button class="inc-btn" onclick="addMinutes('pkl', 15)">+15m</button>
+              <button class="inc-btn" onclick="addMinutes('pkl', 30)">+30m</button>
+              <button class="inc-btn highlight" onclick="addMinutes('pkl', 60)">+1h00</button>
+            </div>
+            <div class="quick-increments">
+              <button class="inc-btn decrement" onclick="subtractMinutes('pkl', 15)">-15m</button>
+              <button class="inc-btn decrement" onclick="subtractMinutes('pkl', 30)">-30m</button>
+              <button class="inc-btn decrement" onclick="setMinutesDirect('pkl', 0)">Effacer (0)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. PAUT -->
+        <div class="discipline-card">
+          <div class="card-top">
+            <div class="card-left" onclick="openDirectEdit('paut', 'Prières Autres (PAUT)')">
+              <div class="icon-box" style="background: linear-gradient(135deg, #6C8DFB, #4A6FD4);">
+                <i data-lucide="shield"></i>
+              </div>
+              <div>
+                <div>
+                  <span class="tag-abbr">PAUT</span>
+                  <button class="info-btn" onclick="showSigleInfo(event, 'PAUT', 'Prières Autres : Combat spirituel, intercession pour l’église, la nation et la prière collective.')">i</button>
+                </div>
+                <div class="card-title">Prières Autres (Combat, Intercession)</div>
+              </div>
+            </div>
+            <div class="card-val-container" onclick="openDirectEdit('paut', 'Prières Autres (PAUT)')">
+              <div class="card-val empty" id="val_paut">0 min</div>
+              <button class="edit-icon-btn"><i data-lucide="edit-3" style="width:15px"></i></button>
+            </div>
+          </div>
+          <div class="actions-row">
+            <div class="quick-increments">
+              <button class="inc-btn" onclick="addMinutes('paut', 15)">+15m</button>
+              <button class="inc-btn" onclick="addMinutes('paut', 30)">+30m</button>
+              <button class="inc-btn highlight" onclick="addMinutes('paut', 60)">+1h00</button>
+            </div>
+            <div class="quick-increments">
+              <button class="inc-btn decrement" onclick="subtractMinutes('paut', 15)">-15m</button>
+              <button class="inc-btn decrement" onclick="subtractMinutes('paut', 30)">-30m</button>
+              <button class="inc-btn decrement" onclick="setMinutesDirect('paut', 0)">Effacer (0)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. LB -->
+        <div class="discipline-card">
+          <div class="card-top">
+            <div class="card-left" onclick="openDirectEditCount('lb', 'Lecture Biblique (LB - Chapitres)')">
+              <div class="icon-box" style="background: linear-gradient(135deg, #5AB69F, #3F8A65);">
+                <i data-lucide="book-open"></i>
+              </div>
+              <div>
+                <div>
+                  <span class="tag-abbr">LB</span>
+                  <button class="info-btn" onclick="showSigleInfo(event, 'LB', 'Lecture Biblique : Nombre de chapitres lus dans la Bible.')">i</button>
+                </div>
+                <div class="card-title">Lecture Biblique</div>
+              </div>
+            </div>
+            <div class="card-val-container" onclick="openDirectEditCount('lb', 'Lecture Biblique (LB - Chapitres)')">
+              <div class="card-val empty" id="val_lb">0 chap.</div>
+              <button class="edit-icon-btn"><i data-lucide="edit-3" style="width:15px"></i></button>
+            </div>
+          </div>
+          <div class="actions-row">
+            <div class="quick-increments">
+              <button class="inc-btn" onclick="addCount('lb', 1)">+1 chap</button>
+              <button class="inc-btn" onclick="addCount('lb', 5)">+5 chap</button>
+              <button class="inc-btn highlight" onclick="addCount('lb', 10)">+10 chap</button>
+            </div>
+            <div class="quick-increments">
+              <button class="inc-btn decrement" onclick="subtractCount('lb', 1)">-1 chap</button>
+              <button class="inc-btn decrement" onclick="subtractCount('lb', 5)">-5 chap</button>
+              <button class="inc-btn decrement" onclick="setCountDirect('lb', 0)">Effacer (0)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. LC -->
+        <div class="discipline-card">
+          <div class="card-top">
+            <div class="card-left" onclick="openDirectEdit('lc', 'Lecture Chrétienne (LC - Livres)')">
+              <div class="icon-box" style="background: linear-gradient(135deg, #E587B3, #B03058);">
+                <i data-lucide="bookmark"></i>
+              </div>
+              <div>
+                <div>
+                  <span class="tag-abbr">LC</span>
+                  <button class="info-btn" onclick="showSigleInfo(event, 'LC', 'Lecture Chrétienne : Temps passé à lire des livres chrétiens édifiants.')">i</button>
+                </div>
+                <div class="card-title">Lecture Chrétienne</div>
+              </div>
+            </div>
+            <div class="card-val-container" onclick="openDirectEdit('lc', 'Lecture Chrétienne (LC - Livres)')">
+              <div class="card-val empty" id="val_lc">0 min</div>
+              <button class="edit-icon-btn"><i data-lucide="edit-3" style="width:15px"></i></button>
+            </div>
+          </div>
+          <div class="actions-row">
+            <div class="quick-increments">
+              <button class="inc-btn" onclick="addMinutes('lc', 15)">+15m</button>
+              <button class="inc-btn" onclick="addMinutes('lc', 30)">+30m</button>
+              <button class="inc-btn highlight" onclick="addMinutes('lc', 60)">+1h00</button>
+            </div>
+            <div class="quick-increments">
+              <button class="inc-btn decrement" onclick="subtractMinutes('lc', 15)">-15m</button>
+              <button class="inc-btn decrement" onclick="subtractMinutes('lc', 30)">-30m</button>
+              <button class="inc-btn decrement" onclick="setMinutesDirect('lc', 0)">Effacer (0)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. EVG -->
+        <div class="discipline-card">
+          <div class="card-top">
+            <div class="card-left" onclick="openDirectEdit('evg', 'Évangélisation (EVG - Durée)')">
+              <div class="icon-box" style="background: linear-gradient(135deg, #F39C6B, #C9822B);">
+                <i data-lucide="megaphone"></i>
+              </div>
+              <div>
+                <div>
+                  <span class="tag-abbr">EVG</span>
+                  <button class="info-btn" onclick="showSigleInfo(event, 'EVG', 'Évangélisation : Durée passée à témoigner et annoncer l’Évangile de Jésus-Christ.')">i</button>
+                </div>
+                <div class="card-title">Évangélisation (Durée)</div>
+              </div>
+            </div>
+            <div class="card-val-container" onclick="openDirectEdit('evg', 'Évangélisation (EVG - Durée)')">
+              <div class="card-val empty" id="val_evg">0 min</div>
+              <button class="edit-icon-btn"><i data-lucide="edit-3" style="width:15px"></i></button>
+            </div>
+          </div>
+          <div class="actions-row">
+            <div class="quick-increments">
+              <button class="inc-btn" onclick="addMinutes('evg', 15)">+15m</button>
+              <button class="inc-btn" onclick="addMinutes('evg', 30)">+30m</button>
+              <button class="inc-btn highlight" onclick="addMinutes('evg', 60)">+1h00</button>
+            </div>
+            <div class="quick-increments">
+              <button class="inc-btn decrement" onclick="subtractMinutes('evg', 15)">-15m</button>
+              <button class="inc-btn decrement" onclick="subtractMinutes('evg', 30)">-30m</button>
+              <button class="inc-btn decrement" onclick="setMinutesDirect('evg', 0)">Effacer (0)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. PG -->
+        <div class="discipline-card">
+          <div class="card-top">
+            <div class="card-left" onclick="openDirectEditCount('pg', 'Personnes Gagnées à Christ (PG)')">
+              <div class="icon-box" style="background: linear-gradient(135deg, #B588F7, #6E3CB8);">
+                <i data-lucide="user-plus"></i>
+              </div>
+              <div>
+                <div>
+                  <span class="tag-abbr">PG</span>
+                  <button class="info-btn" onclick="showSigleInfo(event, 'PG', 'Personnes Gagnées : Nombre d’âmes conduites à Christ pendant la journée.')">i</button>
+                </div>
+                <div class="card-title">Personnes Gagnées à Christ</div>
+              </div>
+            </div>
+            <div class="card-val-container" onclick="openDirectEditCount('pg', 'Personnes Gagnées à Christ (PG)')">
+              <div class="card-val empty" id="val_pg">0 âme</div>
+              <button class="edit-icon-btn"><i data-lucide="edit-3" style="width:15px"></i></button>
+            </div>
+          </div>
+          <div class="actions-row">
+            <div class="quick-increments">
+              <button class="inc-btn" onclick="addCount('pg', 1)">+1 Âme</button>
+              <button class="inc-btn" onclick="addCount('pg', 2)">+2 Âmes</button>
+              <button class="inc-btn highlight" onclick="addCount('pg', 5)">+5 Âmes</button>
+            </div>
+            <div class="quick-increments">
+              <button class="inc-btn decrement" onclick="subtractCount('pg', 1)">-1 Âme</button>
+              <button class="inc-btn decrement" onclick="subtractCount('pg', 2)">-2 Âmes</button>
+              <button class="inc-btn decrement" onclick="setCountDirect('pg', 0)">Effacer (0)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. RS -->
+        <div class="discipline-card">
+          <div class="card-top">
+            <div class="card-left" onclick="openDirectEdit('rs', 'Retraite Spirituelle (RS)')">
+              <div class="icon-box" style="background: linear-gradient(135deg, #7FA287, #3F8A65);">
+                <i data-lucide="trees"></i>
+              </div>
+              <div>
+                <div>
+                  <span class="tag-abbr">RS</span>
+                  <button class="info-btn" onclick="showSigleInfo(event, 'RS', 'Retraite Spirituelle : Temps prolongé de mise à part pour le jeûne et la prière.')">i</button>
+                </div>
+                <div class="card-title">Retraite Spirituelle</div>
+              </div>
+            </div>
+            <div class="card-val-container" onclick="openDirectEdit('rs', 'Retraite Spirituelle (RS)')">
+              <div class="card-val empty" id="val_rs">0 min</div>
+              <button class="edit-icon-btn"><i data-lucide="edit-3" style="width:15px"></i></button>
+            </div>
+          </div>
+          <div class="actions-row">
+            <div class="quick-increments">
+              <button class="inc-btn" onclick="addMinutes('rs', 30)">+30m</button>
+              <button class="inc-btn" onclick="addMinutes('rs', 60)">+1h00</button>
+              <button class="inc-btn highlight" onclick="addMinutes('rs', 120)">+2h00</button>
+            </div>
+            <div class="quick-increments">
+              <button class="inc-btn decrement" onclick="subtractMinutes('rs', 30)">-30m</button>
+              <button class="inc-btn decrement" onclick="subtractMinutes('rs', 60)">-1h00</button>
+              <button class="inc-btn decrement" onclick="setMinutesDirect('rs', 0)">Effacer (0)</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- === VUE 2 : FICHE MENSUELLE (TABLEAU AVEC COLONNE FIGÉE) === -->
+      <div id="viewSheet" class="tab-view" style="display:none;">
+        <div class="floral-banner" style="padding:14px 18px;">
+          <h2><span>📋</span> Fiche Mensuelle CMCI</h2>
+          <p id="sheetMonthSubtitle">Compte-rendu de Mars 2026</p>
+        </div>
+
+        <div class="month-selector-bar" onclick="openMonthModal()" style="margin-bottom:12px;">
+          <div class="month-display-title">
+            <i data-lucide="calendar" style="width:18px; color:var(--primary-rose);"></i>
+            <span id="sheetActiveMonth">MARS 2026</span>
+          </div>
+          <div class="month-change-btn">
+            <span>Changer de mois</span>
+            <i data-lucide="chevron-down" style="width:13px;"></i>
+          </div>
+        </div>
+
+        <!-- Bannière de Vérification Avant Export PDF -->
+        <div class="checklist-banner" id="checklistBanner">
+          <i data-lucide="check-circle" style="width:16px;"></i>
+          <span id="checklistText">Vérification : 0 jours complétés</span>
+        </div>
+
+        <div class="summary-grid">
+          <div class="sum-box">
+            <div class="num" id="sumPriereSeule">0 min</div>
+            <div class="lbl">Total Prière Seule (PSM+RDQD)</div>
+          </div>
+          <div class="sum-box">
+            <div class="num" id="sumMoyenne">00h 00 min/j</div>
+            <div class="lbl">Moyenne quotidienne</div>
+          </div>
+          <div class="sum-box">
+            <div class="num" id="sumBible">0 chap.</div>
+            <div class="lbl">Total Bible (LB)</div>
+          </div>
+          <div class="sum-box">
+            <div class="num" id="sumAmes">0 âme</div>
+            <div class="lbl">Personnes Gagnées (PG)</div>
+          </div>
+        </div>
+
+        <!-- Boutons d'Action : PDF + Tout effacer -->
+        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+          <button onclick="downloadOfficialPdf()" style="width:100%; padding:12px; background:linear-gradient(135deg, #DF6186, #C8466D); color:white; border:none; border-radius:14px; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; gap:6px; cursor:pointer; box-shadow:var(--shadow-glow);">
+            <i data-lucide="file-down" style="width:16px"></i> Télécharger la Fiche PDF Officielle
+          </button>
+          <button onclick="clearEntireMonth()" style="padding:8px; background:#FFF0F4; color:var(--primary-rose-dark); border:1px solid #F8CAD8; border-radius:12px; font-weight:700; font-size:11.5px; cursor:pointer;">
+            <i data-lucide="trash-2" style="width:13px"></i> Réinitialiser ce mois
+          </button>
+        </div>
+
+        <!-- TABLEAU AVEC COLONNE FIGÉE "JOUR" -->
+        <div class="table-container">
+          <table id="monthlyTable">
+            <thead>
+              <tr>
+                <th class="sticky-col">J</th>
+                <th>PKL</th>
+                <th>PSM</th>
+                <th>PAUT</th>
+                <th>RDQD</th>
+                <th>LB</th>
+                <th>LC</th>
+                <th>EVG</th>
+                <th>PG</th>
+                <th>JP/JC</th>
+                <th>RS</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+            <tfoot>
+              <tr class="tot-row" id="tableTotalRow"></tr>
+            </tfoot>
+          </table>
+        </div>
+        <p style="font-size:11px; color:var(--text-muted); text-align:center; margin-top:8px; font-weight:600;">💡 La colonne <strong>J</strong> reste figée à gauche pendant le défilement.</p>
+      </div>
+
+      <!-- === VUE 3 : BILAN & LIVRES === -->
+      <div id="viewBooks" class="tab-view" style="display:none;">
+        <div class="floral-banner">
+          <h2><span>📖</span> Livres Lus & Âmes</h2>
+          <p>Bilan littéraire et requêtes de prière</p>
+        </div>
+
+        <div class="discipline-card">
+          <div style="font-weight:700; font-size:14px; margin-bottom:10px;">
+            <span>➕ Ajouter un livre lu</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <input type="text" id="newBookTitle" class="input-field" placeholder="Titre du livre..." />
+            <div style="display:flex; gap:8px;">
+              <input type="text" id="newBookAuthor" class="input-field" placeholder="Auteur (ex: ZTF)" value="ZTF" style="flex:1;" />
+              <button onclick="addBookDirect()" style="padding:9px 18px; background:var(--primary-rose); color:white; border:none; border-radius:12px; font-weight:700; font-size:12.5px; cursor:pointer;">
+                Ajouter
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="discipline-card">
+          <div style="font-weight:700; font-size:14px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+            <span>📚 Livres Lus Ce Mois (<span id="booksCount">0</span>)</span>
+          </div>
+          <div id="booksList"></div>
+        </div>
+
+        <div class="discipline-card">
+          <div style="font-weight:700; font-size:14px; margin-bottom:8px;">🙏 Besoins de Prières</div>
+          <textarea id="prayerReqInput" rows="4" style="width:100%; border:1.2px solid var(--divider); border-radius:12px; padding:10px; font-size:12.5px; outline:none; color:var(--text-main); font-weight:600;" placeholder="Écrivez vos requêtes de prière pour le mois..." oninput="saveUserData()"></textarea>
+        </div>
+      </div>
+
+      <!-- === VUE 4 : PROFIL & SAUVEGARDE === -->
+      <div id="viewProfile" class="tab-view" style="display:none;">
+        <div class="floral-banner">
+          <h2><span>👤</span> Mon Profil CMCI</h2>
+          <p>Informations figurant sur la fiche officielle</p>
+        </div>
+
+        <div class="discipline-card">
+          <div style="margin-bottom:12px;">
+            <label style="font-size:11px; font-weight:700; color:var(--text-muted);">MON NOM ET PRÉNOM(S)</label>
+            <input type="text" id="profDisciple" class="input-field" style="width:100%; margin-top:4px;" value="ASSEU ALINE" oninput="saveUserData()" />
+          </div>
+          <div style="margin-bottom:12px;">
+            <label style="font-size:11px; font-weight:700; color:var(--text-muted);">MON FAISEUR DE DISCIPLE</label>
+            <input type="text" id="profMaker" class="input-field" style="width:100%; margin-top:4px;" value="PST KPO LOUA DANIEL" oninput="saveUserData()" />
+          </div>
+          <div style="margin-bottom:12px;">
+            <label style="font-size:11px; font-weight:700; color:var(--text-muted);">MON ASSEMBLÉE</label>
+            <input type="text" id="profAssembly" class="input-field" style="width:100%; margin-top:4px;" value="CHEZ LES NGUESSAN" oninput="saveUserData()" />
+          </div>
+          <div>
+            <label style="font-size:11px; font-weight:700; color:var(--text-muted);">OBJECTIF DE PRIÈRE QUOTIDIENNE (MINUTES)</label>
+            <input type="number" id="profPrayerGoal" class="input-field" style="width:100%; margin-top:4px;" value="60" oninput="saveUserData()" />
+          </div>
+        </div>
+
+        <div class="discipline-card">
+          <div style="font-weight:700; font-size:14px; margin-bottom:8px;">💾 Sauvegarde & Sécurité</div>
+          <p style="font-size:11.5px; color:var(--text-muted); margin-bottom:10px; font-weight:600;">Exportez vos données pour ne jamais les perdre ou restaurez une ancienne sauvegarde.</p>
+          <div style="display:flex; gap:8px;">
+            <button onclick="exportBackupJson()" style="flex:1; padding:9px; background:var(--primary-rose-light); color:var(--primary-rose-dark); border:1px solid var(--primary-blush); border-radius:12px; font-size:12px; font-weight:700; cursor:pointer;">
+              Exporter Sauvegarde
+            </button>
+            <button onclick="importBackupJsonPrompt()" style="flex:1; padding:9px; background:#F0E8EB; color:var(--text-main); border:none; border-radius:12px; font-size:12px; font-weight:700; cursor:pointer;">
+              Restaurer
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 📅 MODAL DE SÉLECTION DU MOIS & DE L'ANNÉE -->
+    <div class="modal-backdrop" id="monthModal">
+      <div class="modal-card">
+        <h3>📅 Choisir le Mois à Remplir</h3>
+        <p style="font-size:12px; color:var(--text-muted); font-weight:600; margin-bottom:12px;">Sélectionnez le mois et l’année de votre fiche de compte-rendu :</p>
+        
+        <!-- Sélecteur d'année -->
+        <div style="display:flex; justify-content:space-between; align-items:center; background:#FFF0F5; border-radius:12px; padding:6px 14px; margin-bottom:10px;">
+          <button onclick="changeYear(-1)" style="background:none; border:none; font-size:16px; font-weight:bold; color:var(--primary-rose-dark); cursor:pointer;">◀</button>
+          <span id="modalYearDisplay" style="font-weight:800; font-size:15px; color:var(--primary-rose-dark);">2026</span>
+          <button onclick="changeYear(1)" style="background:none; border:none; font-size:16px; font-weight:bold; color:var(--primary-rose-dark); cursor:pointer;">▶</button>
+        </div>
+
+        <!-- Grille des 12 Mois -->
+        <div class="months-grid" id="monthsGrid"></div>
+
+        <div class="modal-actions">
+          <button class="btn-cancel" onclick="closeMonthModal()">Fermer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE SAISIE DIRECTE DES DISCIPLINES -->
+    <div class="modal-backdrop" id="editModal">
+      <div class="modal-card">
+        <h3 id="modalTitle">Modifier la discipline</h3>
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px; font-weight:600;" id="modalSubtitle">Entrez directement la valeur exacte :</p>
+        
+        <div id="modalMinutesInputs" class="input-row">
+          <div style="flex:1;">
+            <label style="font-size:11px; font-weight:700; color:var(--text-muted);">Heures (h)</label>
+            <input type="number" id="modalHours" min="0" max="23" class="input-field" style="width:100%; margin-top:4px;" placeholder="0">
+          </div>
+          <div style="flex:1;">
+            <label style="font-size:11px; font-weight:700; color:var(--text-muted);">Minutes (m)</label>
+            <input type="number" id="modalMinutes" min="0" max="59" class="input-field" style="width:100%; margin-top:4px;" placeholder="0">
+          </div>
+        </div>
+
+        <div id="modalCountInput" class="input-row" style="display:none;">
+          <div style="flex:1;">
+            <label style="font-size:11px; font-weight:700; color:var(--text-muted);" id="modalCountLabel">Nombre</label>
+            <input type="number" id="modalCount" min="0" class="input-field" style="width:100%; margin-top:4px;" placeholder="0">
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-delete" onclick="saveDirectEdit(0, 0)">Effacer (0)</button>
+          <button class="btn-cancel" onclick="closeModal()">Annuler</button>
+          <button class="btn-save" onclick="applyModalEdit()">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BARRE DE NAVIGATION INFÉRIEURE -->
+    <div class="bottom-nav">
+      <div class="nav-tab active" onclick="switchTab('viewToday', this)">
+        <i data-lucide="spa"></i>
+        <span>Aujourd’hui</span>
+      </div>
+      <div class="nav-tab" onclick="switchTab('viewSheet', this)">
+        <i data-lucide="table-2"></i>
+        <span>Fiche (1-31)</span>
+      </div>
+      <div class="nav-tab" onclick="switchTab('viewBooks', this)">
+        <i data-lucide="book-heart"></i>
+        <span>Bilan</span>
+      </div>
+      <div class="nav-tab" onclick="switchTab('viewProfile', this)">
+        <i data-lucide="user"></i>
+        <span>Profil</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const MONTH_NAMES = [
+      'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+      'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+    ];
+
+    // État actif du Mois, de l'Année et du Jour
+    let activeYear = 2026;
+    let activeMonth = 3; // 3 = Mars
+    let selectedDay = 1;
+
+    let monthData = {};
+    let books = [];
+
+    // Obtenir le nombre de jours exacts dans le mois
+    function getDaysInMonth(year, month) {
+      return new Date(year, month, 0).getDate();
+    }
+
+    // Charger les données du mois sélectionné
+    function loadActiveMonthData() {
+      const storageKey = `cmci_data_${activeYear}_${activeMonth.toString().padStart(2, '0')}`;
+      const booksKey = `cmci_books_${activeYear}_${activeMonth.toString().padStart(2, '0')}`;
+      const totalDays = getDaysInMonth(activeYear, activeMonth);
+
+      const savedMonth = localStorage.getItem(storageKey);
+      if (savedMonth) {
+        monthData = JSON.parse(savedMonth);
+      } else {
+        monthData = {};
+        for (let i = 1; i <= totalDays; i++) {
+          monthData[i] = { pkl: 0, psm: 0, paut: 0, rdqd: 0, lb: 0, lc: 0, evg: 0, pg: 0, fasting: '', rs: 0 };
+        }
+      }
+
+      books = JSON.parse(localStorage.getItem(booksKey)) || [];
+
+      // Ajuster selectedDay si le mois a moins de jours (ex: 28/29 pour Février)
+      if (selectedDay > totalDays) selectedDay = totalDays;
+
+      document.getElementById('activeMonthDisplay').textContent = `${MONTH_NAMES[activeMonth - 1].toUpperCase()} ${activeYear}`;
+      document.getElementById('sheetActiveMonth').textContent = `${MONTH_NAMES[activeMonth - 1].toUpperCase()} ${activeYear}`;
+      document.getElementById('sheetMonthSubtitle').textContent = `Compte-rendu de ${MONTH_NAMES[activeMonth - 1]} ${activeYear}`;
+      document.getElementById('bannerTotalDays').textContent = totalDays;
+
+      initDateScroller();
+      renderBooks();
+      updateDisplay();
+    }
+
+    function saveUserData() {
+      const storageKey = `cmci_data_${activeYear}_${activeMonth.toString().padStart(2, '0')}`;
+      const booksKey = `cmci_books_${activeYear}_${activeMonth.toString().padStart(2, '0')}`;
+
+      localStorage.setItem(storageKey, JSON.stringify(monthData));
+      localStorage.setItem(booksKey, JSON.stringify(books));
+      localStorage.setItem('cmci_profile_name', document.getElementById('profDisciple').value);
+      localStorage.setItem('cmci_profile_maker', document.getElementById('profMaker').value);
+      localStorage.setItem('cmci_profile_assembly', document.getElementById('profAssembly').value);
+      localStorage.setItem('cmci_prayer_goal', document.getElementById('profPrayerGoal').value);
+      localStorage.setItem('cmci_prayer_req', document.getElementById('prayerReqInput').value);
+      updateDisplay();
+    }
+
+    // Modal de sélection du mois
+    let tempModalYear = activeYear;
+
+    function openMonthModal() {
+      tempModalYear = activeYear;
+      document.getElementById('modalYearDisplay').textContent = tempModalYear;
+      renderMonthsGrid();
+      document.getElementById('monthModal').classList.add('show');
+    }
+
+    function closeMonthModal() {
+      document.getElementById('monthModal').classList.remove('show');
+    }
+
+    function changeYear(delta) {
+      tempModalYear += delta;
+      document.getElementById('modalYearDisplay').textContent = tempModalYear;
+      renderMonthsGrid();
+    }
+
+    function renderMonthsGrid() {
+      const grid = document.getElementById('monthsGrid');
+      grid.innerHTML = MONTH_NAMES.map((name, idx) => {
+        const mNum = idx + 1;
+        const isSelected = (mNum === activeMonth && tempModalYear === activeYear);
+        return `
+          <button class="month-pick-btn ${isSelected ? 'selected' : ''}" onclick="selectMonth(${mNum}, ${tempModalYear})">
+            ${name}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectMonth(mNum, year) {
+      activeMonth = mNum;
+      activeYear = year;
+      closeMonthModal();
+      loadActiveMonthData();
+    }
+
+    function clearEntireMonth() {
+      const totalDays = getDaysInMonth(activeYear, activeMonth);
+      if (confirm(`Voulez-vous vraiment effacer toutes les données de ${MONTH_NAMES[activeMonth - 1]} ${activeYear} ?`)) {
+        for (let i = 1; i <= totalDays; i++) {
+          monthData[i] = { pkl:0, psm:0, paut:0, rdqd:0, lb:0, lc:0, evg:0, pg:0, fasting:'', rs:0 };
+        }
+        books = [];
+        saveUserData();
+        renderBooks();
+      }
+    }
+
+    function resetCurrentDay() {
+      if (confirm(`Voulez-vous remettre à zéro le Jour ${selectedDay} ?`)) {
+        monthData[selectedDay] = { pkl:0, psm:0, paut:0, rdqd:0, lb:0, lc:0, evg:0, pg:0, fasting:'', rs:0 };
+        saveUserData();
+      }
+    }
+
+    function fmtMin(min) {
+      if (!min || min <= 0) return '';
+      const h = Math.floor(min / 60);
+      const m = min % 60;
+      if (h > 0 && m > 0) return `${h}h${m.toString().padStart(2, '0')}`;
+      if (h > 0) return `${h}h`;
+      return `${m}m`;
+    }
+
+    function fmtMinLong(min) {
+      if (!min || min <= 0) return '0 min';
+      const h = Math.floor(min / 60);
+      const m = min % 60;
+      if (h > 0 && m > 0) return `${h}h ${m}min`;
+      if (h > 0) return `${h}h 00min`;
+      return `${m}min`;
+    }
+
+    function initDateScroller() {
+      const scroller = document.getElementById('dateScroller');
+      scroller.innerHTML = '';
+      const totalDays = getDaysInMonth(activeYear, activeMonth);
+      const daysAbbr = ['DIM', 'LUN', 'MAR', 'MER', 'JEU', 'VEN', 'SAM'];
+
+      for (let d = 1; d <= totalDays; d++) {
+        const pill = document.createElement('div');
+        pill.className = `date-pill ${d === selectedDay ? 'active' : ''}`;
+        pill.onclick = () => selectDay(d);
+
+        const dDate = new Date(activeYear, activeMonth - 1, d);
+        const dName = daysAbbr[dDate.getDay()];
+        pill.innerHTML = `
+          <span class="day-name">${dName}</span>
+          <span class="day-num">${d}</span>
+        `;
+        scroller.appendChild(pill);
+      }
+    }
+
+    function selectDay(d) {
+      selectedDay = d;
+      initDateScroller();
+      updateDisplay();
+    }
+
+    function setFast(type) {
+      monthData[selectedDay].fasting = (type === 'none') ? '' : type;
+      saveUserData();
+    }
+
+    function addMinutes(type, mins) {
+      monthData[selectedDay][type] = (monthData[selectedDay][type] || 0) + mins;
+      saveUserData();
+    }
+
+    function subtractMinutes(type, mins) {
+      monthData[selectedDay][type] = Math.max(0, (monthData[selectedDay][type] || 0) - mins);
+      saveUserData();
+    }
+
+    function setMinutesDirect(type, mins) {
+      monthData[selectedDay][type] = Math.max(0, mins);
+      saveUserData();
+    }
+
+    function addCount(type, count) {
+      monthData[selectedDay][type] = (monthData[selectedDay][type] || 0) + count;
+      saveUserData();
+    }
+
+    function subtractCount(type, count) {
+      monthData[selectedDay][type] = Math.max(0, (monthData[selectedDay][type] || 0) - count);
+      saveUserData();
+    }
+
+    function setCountDirect(type, count) {
+      monthData[selectedDay][type] = Math.max(0, count);
+      saveUserData();
+    }
+
+    function showSigleInfo(event, sigle, description) {
+      event.stopPropagation();
+      alert(`ℹ️ SIGLE CMCI : ${sigle}\n\n${description}`);
+    }
+
+    let currentEditType = '';
+    let isCountEdit = false;
+
+    function openDirectEdit(type, title) {
+      currentEditType = type;
+      isCountEdit = false;
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalMinutesInputs').style.display = 'flex';
+      document.getElementById('modalCountInput').style.display = 'none';
+
+      const totalMins = monthData[selectedDay][type] || 0;
+      document.getElementById('modalHours').value = Math.floor(totalMins / 60) || '';
+      document.getElementById('modalMinutes').value = (totalMins % 60) || '';
+
+      document.getElementById('editModal').classList.add('show');
+    }
+
+    function openDirectEditCount(type, title) {
+      currentEditType = type;
+      isCountEdit = true;
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalMinutesInputs').style.display = 'none';
+      document.getElementById('modalCountInput').style.display = 'flex';
+      document.getElementById('modalCountLabel').textContent = type === 'lb' ? 'Nombre de chapitres' : 'Nombre d’âmes';
+      document.getElementById('modalCount').value = monthData[selectedDay][type] || '';
+
+      document.getElementById('editModal').classList.add('show');
+    }
+
+    function closeModal() {
+      document.getElementById('editModal').classList.remove('show');
+    }
+
+    function applyModalEdit() {
+      if (isCountEdit) {
+        const count = parseInt(document.getElementById('modalCount').value) || 0;
+        setCountDirect(currentEditType, count);
+      } else {
+        const h = parseInt(document.getElementById('modalHours').value) || 0;
+        const m = parseInt(document.getElementById('modalMinutes').value) || 0;
+        setMinutesDirect(currentEditType, (h * 60) + m);
+      }
+      closeModal();
+    }
+
+    function saveDirectEdit(h, m) {
+      if (isCountEdit) {
+        setCountDirect(currentEditType, 0);
+      } else {
+        setMinutesDirect(currentEditType, 0);
+      }
+      closeModal();
+    }
+
+    // Chronomètre
+    let timerInterval = null;
+    let timerStartTime = null;
+    let isTimerRunning = false;
+
+    function toggleTimer() {
+      const btn = document.getElementById('timerActionBtn');
+      if (!isTimerRunning) {
+        isTimerRunning = true;
+        timerStartTime = Date.now();
+        btn.innerHTML = '<i data-lucide="square" style="width:14px;"></i> Arrêter';
+        btn.className = 'timer-btn running';
+        timerInterval = setInterval(() => {
+          const elapsedSec = Math.floor((Date.now() - timerStartTime) / 1000);
+          const h = Math.floor(elapsedSec / 3600).toString().padStart(2, '0');
+          const m = Math.floor((elapsedSec % 3600) / 60).toString().padStart(2, '0');
+          const s = (elapsedSec % 60).toString().padStart(2, '0');
+          document.getElementById('timerDisplay').textContent = `${h}:${m}:${s}`;
+        }, 1000);
+      } else {
+        isTimerRunning = false;
+        clearInterval(timerInterval);
+        const elapsedSec = Math.floor((Date.now() - timerStartTime) / 1000);
+        const minsRecorded = Math.max(1, Math.round(elapsedSec / 60));
+        const cat = document.getElementById('timerCategory').value;
+        addMinutes(cat, minsRecorded);
+        alert(`🌸 ${minsRecorded} minute(s) de prière enregistrée(s) avec succès !`);
+        document.getElementById('timerDisplay').textContent = '00:00:00';
+        btn.innerHTML = '<i data-lucide="play" style="width:14px;"></i> Démarrer';
+        btn.className = 'timer-btn';
+      }
+      lucide.createIcons();
+    }
+
+    function updateDisplay() {
+      const cur = monthData[selectedDay] || {};
+
+      setCardVal('val_psm', cur.psm);
+      setCardVal('val_rdqd', cur.rdqd);
+      setCardVal('val_pkl', cur.pkl);
+      setCardVal('val_paut', cur.paut);
+      
+      const lbVal = document.getElementById('val_lb');
+      lbVal.textContent = cur.lb > 0 ? `${cur.lb} chap.` : '0 chap.';
+      lbVal.className = cur.lb > 0 ? 'card-val' : 'card-val empty';
+
+      setCardVal('val_lc', cur.lc);
+      setCardVal('val_evg', cur.evg);
+      
+      const pgVal = document.getElementById('val_pg');
+      pgVal.textContent = cur.pg > 0 ? `${cur.pg} âme${cur.pg > 1 ? 's' : ''}` : '0 âme';
+      pgVal.className = cur.pg > 0 ? 'card-val' : 'card-val empty';
+
+      setCardVal('val_rs', cur.rs);
+
+      const dayPrayer = (cur.pkl||0) + (cur.psm||0) + (cur.paut||0) + (cur.rdqd||0);
+      document.getElementById('dayTotalPrayer').textContent = fmtMinLong(dayPrayer);
+      document.getElementById('bannerDayNum').textContent = selectedDay;
+
+      const targetGoal = parseInt(localStorage.getItem('cmci_prayer_goal')) || 60;
+      const pct = Math.min(100, Math.round((dayPrayer / targetGoal) * 100));
+      document.getElementById('goalFill').style.width = `${pct}%`;
+      document.getElementById('goalPercentText').textContent = `${dayPrayer} / ${targetGoal} min (${pct}%)`;
+
+      const flowerEl = document.getElementById('goalFlower');
+      if (pct >= 100) flowerEl.textContent = '🌸';
+      else if (pct >= 50) flowerEl.textContent = '🌷';
+      else flowerEl.textContent = '🌱';
+
+      document.getElementById('btnFastNone').className = `fasting-btn ${!cur.fasting ? 'active' : ''}`;
+      document.getElementById('btnFastJP').className = `fasting-btn ${cur.fasting === 'JP' ? 'active' : ''}`;
+      document.getElementById('btnFastJC').className = `fasting-btn ${cur.fasting === 'JC' ? 'active' : ''}`;
+
+      const discName = localStorage.getItem('cmci_profile_name') || 'ASSEU ALINE';
+      document.getElementById('bannerDisciple').textContent = `${discName.split(' ')[0]}`;
+
+      renderTable();
+    }
+
+    function setCardVal(id, mins) {
+      const el = document.getElementById(id);
+      if (mins && mins > 0) {
+        el.textContent = fmtMin(mins);
+        el.className = 'card-val';
+      } else {
+        el.textContent = '0 min';
+        el.className = 'card-val empty';
+      }
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+      const totalDays = getDaysInMonth(activeYear, activeMonth);
+
+      let tot = { pkl:0, psm:0, paut:0, rdqd:0, lb:0, lc:0, evg:0, pg:0, jc:0, rs:0 };
+      let rdqdDays = 0;
+      let completedDays = 0;
+
+      for (let d = 1; d <= totalDays; d++) {
+        const row = monthData[d] || {};
+        const isDayFilled = (row.pkl > 0 || row.psm > 0 || row.paut > 0 || row.rdqd > 0 || row.lb > 0 || row.lc > 0 || row.evg > 0 || row.pg > 0 || row.fasting || row.rs > 0);
+        if (isDayFilled) completedDays++;
+
+        tot.pkl += row.pkl || 0;
+        tot.psm += row.psm || 0;
+        tot.paut += row.paut || 0;
+        tot.rdqd += row.rdqd || 0;
+        tot.lb += row.lb || 0;
+        tot.lc += row.lc || 0;
+        tot.evg += row.evg || 0;
+        tot.pg += row.pg || 0;
+        tot.rs += row.rs || 0;
+        if (row.rdqd > 0) rdqdDays++;
+        if (row.fasting) tot.jc++;
+
+        const tr = document.createElement('tr');
+        if (d === selectedDay) tr.className = 'selected-row';
+        tr.onclick = () => {
+          selectDay(d);
+          switchTab('viewToday', document.querySelectorAll('.nav-tab')[0]);
+        };
+
+        tr.innerHTML = `
+          <td class="sticky-col"><strong>${d}</strong></td>
+          <td>${fmtMin(row.pkl)}</td>
+          <td>${fmtMin(row.psm)}</td>
+          <td>${fmtMin(row.paut)}</td>
+          <td>${fmtMin(row.rdqd)}</td>
+          <td>${row.lb > 0 ? row.lb : ''}</td>
+          <td>${fmtMin(row.lc)}</td>
+          <td>${fmtMin(row.evg)}</td>
+          <td>${row.pg > 0 ? row.pg : ''}</td>
+          <td><strong>${row.fasting || ''}</strong></td>
+          <td>${fmtMin(row.rs)}</td>
+        `;
+        tbody.appendChild(tr);
+      }
+
+      const totRow = document.getElementById('tableTotalRow');
+      totRow.innerHTML = `
+        <td class="sticky-col">TOT</td>
+        <td>${fmtMin(tot.pkl)}</td>
+        <td>${fmtMin(tot.psm)}</td>
+        <td>${fmtMin(tot.paut)}</td>
+        <td>${rdqdDays > 0 ? `${rdqdDays}/${totalDays}<br>` : ''}${fmtMin(tot.rdqd)}</td>
+        <td>${tot.lb > 0 ? `${tot.lb}<br>chap.` : ''}</td>
+        <td>${fmtMin(tot.lc)}</td>
+        <td>${fmtMin(tot.evg)}</td>
+        <td>${tot.pg > 0 ? `${tot.pg}pers` : ''}</td>
+        <td>${tot.jc > 0 ? `${tot.jc}j` : ''}</td>
+        <td>${fmtMin(tot.rs)}</td>
+      `;
+
+      const checkBanner = document.getElementById('checklistBanner');
+      const checkText = document.getElementById('checklistText');
+      if (completedDays >= (totalDays - 2)) {
+        checkBanner.className = 'checklist-banner complete';
+        checkText.innerHTML = `✅ <strong>Fiche de ${MONTH_NAMES[activeMonth - 1]} prête !</strong> ${completedDays} / ${totalDays} jours enregistrés.`;
+      } else {
+        checkBanner.className = 'checklist-banner';
+        checkText.innerHTML = `📝 <strong>État d'avancement :</strong> ${completedDays} / ${totalDays} jours saisis pour ${MONTH_NAMES[activeMonth - 1]}.`;
+      }
+
+      const totalPriereSeule = tot.psm + tot.rdqd;
+      const totalPriereGlobale = tot.pkl + tot.psm + tot.paut + tot.rdqd;
+      const avgDaily = Math.round(totalPriereGlobale / totalDays);
+
+      document.getElementById('sumPriereSeule').textContent = fmtMinLong(totalPriereSeule);
+      document.getElementById('sumMoyenne').textContent = `${Math.floor(avgDaily/60).toString().padStart(2,'0')}h ${(avgDaily%60).toString().padStart(2,'0')} min/j`;
+      document.getElementById('sumBible').textContent = `${tot.lb} chap.`;
+      document.getElementById('sumAmes').textContent = `${tot.pg} âme${tot.pg > 1 ? 's' : ''}`;
+    }
+
+    function switchTab(viewId, element) {
+      document.querySelectorAll('.tab-view').forEach(v => v.style.display = 'none');
+      document.getElementById(viewId).style.display = 'block';
+
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      element.classList.add('active');
+
+      window.scrollTo(0, 0);
+    }
+
+    function addBookDirect() {
+      const titleInput = document.getElementById('newBookTitle');
+      const authorInput = document.getElementById('newBookAuthor');
+      const title = titleInput.value.trim();
+      const author = authorInput.value.trim() || 'ZTF';
+
+      if (title) {
+        books.push(`${title} (${author})`);
+        titleInput.value = '';
+        renderBooks();
+        saveUserData();
+      } else {
+        alert('Veuillez entrer le titre du livre.');
+      }
+    }
+
+    function removeBook(index) {
+      books.splice(index, 1);
+      renderBooks();
+      saveUserData();
+    }
+
+    function renderBooks() {
+      const list = document.getElementById('booksList');
+      document.getElementById('booksCount').textContent = books.length;
+      if (books.length === 0) {
+        list.innerHTML = `<div style="font-size:12px; color:var(--text-muted); font-style:italic; padding:8px 0; font-weight:600;">Aucun livre ajouté pour ${MONTH_NAMES[activeMonth - 1]} ${activeYear}. Entrez un titre ci-dessus pour ajouter.</div>`;
+      } else {
+        list.innerHTML = books.map((b, idx) => `
+          <div style="font-size:12.5px; color:var(--text-main); font-weight:600; padding:8px 0; border-bottom:1px solid var(--divider); display:flex; justify-content:space-between; align-items:center;">
+            <span><strong>${idx + 1}.</strong> ${b}</span>
+            <button onclick="removeBook(${idx})" style="background:none; border:none; color:var(--primary-rose-dark); cursor:pointer; font-size:11px; font-weight:700;">Supprimer</button>
+          </div>
+        `).join('');
+      }
+    }
+
+    function exportBackupJson() {
+      const backup = {
+        profile: {
+          disciple: document.getElementById('profDisciple').value,
+          maker: document.getElementById('profMaker').value,
+          assembly: document.getElementById('profAssembly').value,
+          goal: document.getElementById('profPrayerGoal').value,
+        },
+        year: activeYear,
+        month: activeMonth,
+        books: books,
+        prayerRequests: document.getElementById('prayerReqInput').value,
+        monthData: monthData
+      };
+      const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Sauvegarde_Discipline_CMCI_${MONTH_NAMES[activeMonth - 1]}_${activeYear}.json`;
+      a.click();
+    }
+
+    function importBackupJsonPrompt() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json';
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            try {
+              const data = JSON.parse(event.target.result);
+              if (data.monthData) monthData = data.monthData;
+              if (data.books) books = data.books;
+              if (data.year) activeYear = data.year;
+              if (data.month) activeMonth = data.month;
+              if (data.profile) {
+                if (data.profile.disciple) document.getElementById('profDisciple').value = data.profile.disciple;
+                if (data.profile.maker) document.getElementById('profMaker').value = data.profile.maker;
+                if (data.profile.assembly) document.getElementById('profAssembly').value = data.profile.assembly;
+              }
+              if (data.prayerRequests) document.getElementById('prayerReqInput').value = data.prayerRequests;
+              saveUserData();
+              renderBooks();
+              alert('🌸 Sauvegarde restaurée avec succès !');
+            } catch (err) {
+              alert('Erreur lors de la lecture du fichier de sauvegarde.');
+            }
+          };
+          reader.readAsText(file);
+        }
+      };
+      input.click();
+    }
+
+    function downloadOfficialPdf() {
+      const disc = document.getElementById('profDisciple').value || 'ASSEU ALINE';
+      const maker = document.getElementById('profMaker').value || 'PST KPO LOUA DANIEL';
+      const ass = document.getElementById('profAssembly').value || 'CHEZ LES NGUESSAN';
+      const totalDays = getDaysInMonth(activeYear, activeMonth);
+      const mName = MONTH_NAMES[activeMonth - 1].toUpperCase();
+
+      const pdfDiv = document.createElement('div');
+      pdfDiv.style.padding = '20px';
+      pdfDiv.style.fontFamily = 'Arial, sans-serif';
+      pdfDiv.style.fontSize = '10px';
+      pdfDiv.style.color = '#000';
+
+      let tableHtml = `<table border="1" cellpadding="2" cellspacing="0" style="width:100%; border-collapse:collapse; text-align:center; font-size:9px; margin-top:10px;">
+        <tr style="background:#eee; font-weight:bold;">
+          <td></td><td>PKL</td><td>PSM</td><td>PAUT</td><td>RDQD</td><td>LB</td><td>LC</td><td>EVG</td><td>PG</td><td>JP/JC</td><td>RS</td>
+        </tr>`;
+
+      let tot = { pkl:0, psm:0, paut:0, rdqd:0, lb:0, lc:0, evg:0, pg:0, jc:0, rs:0 };
+      let rdqdDays = 0;
+      for (let d = 1; d <= totalDays; d++) {
+        const r = monthData[d] || {};
+        tot.pkl += r.pkl || 0; tot.psm += r.psm || 0; tot.paut += r.paut || 0; tot.rdqd += r.rdqd || 0;
+        tot.lb += r.lb || 0; tot.lc += r.lc || 0; tot.evg += r.evg || 0; tot.pg += r.pg || 0; tot.rs += r.rs || 0;
+        if (r.rdqd > 0) rdqdDays++;
+        if (r.fasting) tot.jc++;
+        tableHtml += `<tr>
+          <td>${d}</td><td>${fmtMin(r.pkl)}</td><td>${fmtMin(r.psm)}</td><td>${fmtMin(r.paut)}</td><td>${fmtMin(r.rdqd)}</td>
+          <td>${r.lb || ''}</td><td>${fmtMin(r.lc)}</td><td>${fmtMin(r.evg)}</td><td>${r.pg || ''}</td><td>${r.fasting || ''}</td><td>${fmtMin(r.rs)}</td>
+        </tr>`;
+      }
+
+      tableHtml += `<tr style="background:#f0f0f0; font-weight:bold;">
+        <td>TOTAL</td><td>${fmtMin(tot.pkl)}</td><td>${fmtMin(tot.psm)}</td><td>${fmtMin(tot.paut)}</td>
+        <td>${rdqdDays > 0 ? `${rdqdDays}/${totalDays}<br>` : ''}${fmtMin(tot.rdqd)}</td><td>${tot.lb > 0 ? `${tot.lb}<br>chapitres` : ''}</td>
+        <td>${fmtMin(tot.lc)}</td><td>${fmtMin(tot.evg)}</td><td>${tot.pg > 0 ? `${tot.pg}pers` : ''}</td><td>${tot.jc > 0 ? `${tot.jc}j` : ''}</td><td>${fmtMin(tot.rs)}</td>
+      </tr></table>`;
+
+      const totPriereSeule = tot.psm + tot.rdqd;
+      const avg = Math.round((tot.pkl + tot.psm + tot.paut + tot.rdqd) / totalDays);
+
+      let booksHtml = books.length > 0 
+        ? books.map((b, i) => `${i+1}. ${b}`).join('<br>')
+        : '1. ............................................................................<br>2.<br>3.';
+
+      pdfDiv.innerHTML = `
+        <div style="font-weight:bold; font-size:12px; text-decoration:underline;">FICHE DE COMPTE RENDU DE : ${disc.toUpperCase()}</div>
+        <div style="font-weight:bold; margin-top:2px;">MOIS DE : ${mName} ${activeYear}</div>
+        <div style="font-weight:bold; margin-top:2px;">FAISEUR DE DISCIPLE : ${maker.toUpperCase()}</div>
+        <div style="font-weight:bold; margin-top:2px;">ASSEMBLÉE : ${ass.toUpperCase()}</div>
+        ${tableHtml}
+        <div style="margin-top:12px; display:flex; justify-content:space-between; font-weight:bold;">
+          <span>TOTAL PRIÈRE SEULE : ${fmtMinLong(totPriereSeule)}</span>
+          <span>moyenne : ${Math.floor(avg/60).toString().padStart(2,'0')}h ${(avg%60).toString().padStart(2,'0')} min/jour</span>
+        </div>
+        <div style="margin-top:4px;">Ames gagnées et intégrées : 00</div>
+        <div style="margin-top:8px; font-weight:bold;">LIVRES LUS : ${books.length.toString().padStart(2, '0')}</div>
+        <div style="padding-left:12px;">${booksHtml}</div>
+        <div style="margin-top:8px; font-weight:bold;">BESOINS DE PRIÈRES :</div>
+        <div style="padding-left:12px;">${document.getElementById('prayerReqInput').value || '....................................................................................................'}</div>
+      `;
+
+      html2pdf().from(pdfDiv).set({
+        margin: 8,
+        filename: `Fiche_${disc}_${mName}_${activeYear}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      }).save();
+    }
+
+    window.onload = () => {
+      loadActiveMonthData();
+      lucide.createIcons();
+    };
+  </script>
+</body>
+</html>
